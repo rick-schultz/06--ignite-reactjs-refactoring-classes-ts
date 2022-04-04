@@ -43,7 +43,6 @@ const Input = ({ name, icon: Icon, ...rest }: InputProps) => {
   return (
     <Container isFilled={isFilled} isFocused={isFocused}>
       {Icon && <Icon size={20} />}
-
       <input
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
