@@ -11,6 +11,7 @@ interface IconProps {
 
 interface InputProps {
   name: string
+  placeholder?: string
   icon?: React.ComponentType<IconProps>
 }
 
