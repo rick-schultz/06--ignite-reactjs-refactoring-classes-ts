@@ -9,7 +9,7 @@ import Input from '../Input'
 interface ModalAddFoodProps {
   isOpen: boolean
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
-  onSubmit: (data: object) => void
+  onSubmit?: (data: object) => void
   handleAddFood: (data: object) => void
 }
 

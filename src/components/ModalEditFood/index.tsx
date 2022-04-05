@@ -22,7 +22,7 @@ interface ModalEditFoodProps {
   editingFood: Food
   isOpen: boolean
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
-  onSubmit: (data: object) => void
+  onSubmit?: (data: object) => void
   handleUpdateFood: (data: object) => void
 }
 
