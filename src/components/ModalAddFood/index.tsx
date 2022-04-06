@@ -10,13 +10,25 @@ interface ModalAddFoodProps {
   isOpen: boolean
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
   onSubmit?: (data: object) => void
-  handleAddFood: (data: object) => void
+  handleAddFood: (data: FoodItemProps) => void
+}
+
+export interface FoodItemProps {
+  id: number
+  name: string
+  description: string
+  price: number
+  available: boolean
+  image: string
+  category: number
+  createdAt: Date
+  updatedAt: Date
 }
 
 function ModalAddFood(props: ModalAddFoodProps) {
   const inputNameRef = createRef<FormHandles>()
 
-  function handleSubmit(data: object) {
+  function handleSubmit(data: FoodItemProps) {
     const { handleAddFood } = props
     handleAddFood(data)
     props.setIsOpen(false)
