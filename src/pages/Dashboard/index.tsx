@@ -7,9 +7,20 @@ import ModalAddFood from '../../components/ModalAddFood'
 import ModalEditFood from '../../components/ModalEditFood'
 import { FoodsContainer } from './styles'
 
+interface FoodItemProps {
+  id: number
+  name: string
+  description: string
+  price: number
+  available: boolean
+  image_url?: string
+}
+
 function Dashboard() {
-  const [foods, setFoods] = useState([])
-  const [editingFood, setEditingFood] = useState({})
+  const [foods, setFoods] = useState<FoodItemProps[]>([])
+  const [editingFood, setEditingFood] = useState<FoodItemProps>(
+    {} as FoodItemProps
+  )
   const [modalOpen, setModalOpen] = useState(false)
   const [editModalOpen, setEditModalOpen] = useState(false)
 
@@ -21,7 +32,7 @@ function Dashboard() {
     loadFoods()
   }, [])
 
-  async function handleAddFood(food) {
+  async function handleAddFood(food: FoodItemProps) {
     try {
       const response = await api.post('/foods', {
         ...food,
@@ -33,7 +44,7 @@ function Dashboard() {
     }
   }
 
-  async function handleUpdateFood(food) {
+  async function handleUpdateFood(food: FoodItemProps) {
     try {
       const foodUpdated = await api.put(`/foods/${editingFood.id}`, {
         ...editingFood,
@@ -48,7 +59,7 @@ function Dashboard() {
     }
   }
 
-  async function handleDeleteFood(id) {
+  async function handleDeleteFood(id: number) {
     await api.delete(`/foods/${id}`)
     const updatedFoods = foods.filter((food) => food.id !== id)
     setFoods(updatedFoods)
@@ -62,7 +73,7 @@ function Dashboard() {
     setEditModalOpen(!editModalOpen)
   }
 
-  function handleEditFood(food) {
+  function handleEditFood(food: FoodItemProps) {
     setEditingFood(food)
     toggleEditModal()
   }
@@ -73,13 +84,13 @@ function Dashboard() {
       <ModalAddFood
         isOpen={modalOpen}
         setIsOpen={toggleModal}
-        handleAddFood={() => handleAddFood}
+        handleAddFood={handleAddFood}
       />
       <ModalEditFood
         isOpen={editModalOpen}
         setIsOpen={toggleEditModal}
         editingFood={editingFood}
-        handleUpdateFood={() => handleUpdateFood(editingFood)}
+        handleUpdateFood={(editingFood) => handleUpdateFood(editingFood)}
       />
 
       <FoodsContainer data-testid="foods-list">
