@@ -6,7 +6,7 @@ import { Form } from './styles'
 import Modal from '../Modal'
 import Input from '../Input'
 
-interface Food {
+interface FoodItemProps {
   id: number
   name: string
   description: string
@@ -19,17 +19,17 @@ interface Food {
 }
 
 interface ModalEditFoodProps {
-  editingFood: Food
+  editingFood: FoodItemProps
   isOpen: boolean
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
   onSubmit?: (data: object) => void
-  handleUpdateFood: (data: object) => void
+  handleUpdateFood: (data: FoodItemProps) => void
 }
 
 function ModalEditFood(props: ModalEditFoodProps) {
   const inputNameRef = createRef<FormHandles>()
 
-  function handleSubmit(data: object) {
+  function handleSubmit(data: FoodItemProps) {
     const { handleUpdateFood } = props
     handleUpdateFood(data)
     props.setIsOpen(false)
